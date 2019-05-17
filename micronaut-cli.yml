@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: person.crud
+---
+testFramework: spock
+sourceLanguage: groovy
