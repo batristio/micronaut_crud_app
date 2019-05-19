@@ -66,6 +66,27 @@ class PersonController {
         }
     }
 
+    @Post('/saveAll')
+    HttpResponse<Map> savePersons(@Body List<Person> persons) {
+        try {
+            return HttpResponse.ok( [persons: persons.each {personService.save(it)}] as Map )
+        } catch (ValidationException e) {
+            return HttpResponse.unprocessableEntity().body(
+                    [
+                            persons: persons,
+                            errors: e.errors.allErrors.collect {
+                                FieldError err = it as FieldError
+                                [
+                                        field: err.field,
+                                        rejectedValud: err.rejectedValue,
+                                        message: err.defaultMessage
+                                ]
+                            }
+                    ]
+            ) as HttpResponse<Map>
+        }
+    }
+
     @Post('/update')
     HttpResponse<Map> updatePerson(@Body Person person) {
         try {
@@ -107,5 +128,4 @@ class PersonController {
             ) as HttpResponse<Map>
         }
     }
-
 }
