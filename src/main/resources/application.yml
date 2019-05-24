@@ -3,6 +3,8 @@ micronaut:
         name: person-crud
     server:
         port: 8086
+        cors:
+            enabled: true
     io:
         watch:
             paths: src/main
