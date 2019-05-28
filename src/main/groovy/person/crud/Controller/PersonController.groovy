@@ -5,7 +5,9 @@ import groovy.transform.CompileStatic
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.Body
 import io.micronaut.http.annotation.Controller
+import io.micronaut.http.annotation.Delete
 import io.micronaut.http.annotation.Get
+import io.micronaut.http.annotation.Patch
 import io.micronaut.http.annotation.Post
 import org.springframework.validation.FieldError
 import person.crud.Model.Person
@@ -108,14 +110,14 @@ class PersonController {
         }
     }
 
-    @Post('/delete/{id}')
-    HttpResponse<Map> deletePerson(@Body Person person) {
+    @Delete('/delete/{id}')
+    HttpResponse<Map> deletePerson(Integer id) {
         try {
-            return HttpResponse.ok( [person: personService.delete(person.id)] as Map )
+            return HttpResponse.ok( [person: personService.delete(id)] as Map )
         } catch (ValidationException e) {
             return HttpResponse.unprocessableEntity().body(
                     [
-                            person: person,
+                            person: id,
                             errors: e.errors.allErrors.collect {
                                 FieldError err = it as FieldError
                                 [
@@ -128,4 +130,5 @@ class PersonController {
             ) as HttpResponse<Map>
         }
     }
+
 }
