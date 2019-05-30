@@ -12,4 +12,5 @@
     <root level="info">
         <appender-ref ref="STDOUT" />
     </root>
+    <!--ToDo: add rule to remove deprecated warnings for hibernate api-->
 </configuration>

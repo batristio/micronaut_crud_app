@@ -1,0 +1,15 @@
+micronaut:
+    application:
+        name: person-crud
+    server:
+        port: 8085
+        cors:
+            enabled: true
+
+dataSource:
+    sql.enforce_refs: true
+    username: sa
+    password:
+    driverClassName: org.hsqldb.jdbcDriver
+    dbCreate: create-update
+    url: jdbc:hsqldb:mem:testDb

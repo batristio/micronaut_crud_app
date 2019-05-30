@@ -19,14 +19,6 @@ dataSource:
     username: micronaut
     password: 12qwaszx!
 
-#    test:
-#        sql.enforce_refs: true
-#        username: sa
-#        password:
-#        driverClassName: org.hsqldb.jdbcDriver
-#        dbCreate: create-update
-#        url: jdbc:hsqldb:mem:testDb
-
 hibernate:
     cache:
         queries: false

@@ -17,7 +17,7 @@ class Person {
 
     static constraints = {
         firstName blank: false, minSize: 2 , maxSize: 50
-        lastName  blank: false, minSize: 2, maxSize: 50
-        age       blank: true, matches: "[\\d{1,3}]"
+        lastName  blank: false, minSize: 2,  maxSize: 50
+        age       blank: true,  matches: "[\\d{1,3}]", notEqual: 0
     }
 }
