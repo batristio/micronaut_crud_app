@@ -9,6 +9,8 @@ import io.micronaut.http.annotation.Delete
 import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.Patch
 import io.micronaut.http.annotation.Post
+import io.micronaut.http.annotation.Put
+import io.reactivex.Single
 import org.springframework.validation.FieldError
 import person.crud.Model.Person
 import person.crud.Service.PersonService
@@ -25,6 +27,11 @@ import org.grails.datastore.mapping.validation.ValidationException
 @Controller('/person')
 class PersonController {
 
+    @Get('/')
+    HttpResponse index() {
+        HttpResponse.ok()
+    }
+
     @Inject
     PersonService personService
 
@@ -33,7 +40,7 @@ class PersonController {
         if (offset && max) {
             personService.findAll([offset:offset.get(), max:max.get()])
         } else {
-            personService.findAll()
+            Person.list()
         }
     }
 
@@ -47,7 +54,7 @@ class PersonController {
         personService.find(id)
     }
 
-    @Post('/save')
+    @Put('/save')
     HttpResponse<Map> savePerson(@Body Person person) {
         try {
             return HttpResponse.ok( [person: personService.save(person)] as Map )
@@ -68,7 +75,7 @@ class PersonController {
         }
     }
 
-    @Post('/saveAll')
+    @Put('/saveAll')
     HttpResponse<Map> savePersons(@Body List<Person> persons) {
         try {
             return HttpResponse.ok( [persons: persons.each {personService.save(it)}] as Map )
@@ -89,7 +96,7 @@ class PersonController {
         }
     }
 
-    @Post('/update')
+    @Patch('/update')
     HttpResponse<Map> updatePerson(@Body Person person) {
         try {
             return HttpResponse.ok( [person: personService.update(person.id, person.firstName, person.lastName)] as Map )
@@ -111,7 +118,7 @@ class PersonController {
     }
 
     @Delete('/delete/{id}')
-    HttpResponse<Map> deletePerson(Integer id) {
+    HttpResponse<Map> deletePerson(@Body Integer id) {
         try {
             return HttpResponse.ok( [person: personService.delete(id)] as Map )
         } catch (ValidationException e) {
@@ -130,5 +137,4 @@ class PersonController {
             ) as HttpResponse<Map>
         }
     }
-
 }
