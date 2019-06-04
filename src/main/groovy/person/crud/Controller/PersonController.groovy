@@ -33,7 +33,7 @@ class PersonController {
     @Inject
     PersonService personService
 
-    @Get('/list{?offset}{?max}')
+    @Get('/list{?offset,max}')
     List<Person> getPeople(@Nullable Optional<Integer> offset, Optional<Integer> max) {
         if (offset && max) {
             personService.findAll([offset:offset.get(), max:max.get()])
