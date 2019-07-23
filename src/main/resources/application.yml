@@ -10,8 +10,21 @@ micronaut:
     io:
         watch:
             paths: src/main
-            restart: true
-
+            restart: false
+    security:
+        enabled: true
+        endpoints:
+            login:
+                enabled: false
+            oauth:
+                enabled: false
+        token:
+            jwt:
+              enabled: true
+              signatures:
+                jwks:
+                  {localhost}:
+                    url: "https://localhost/.well-known/jwks.json"
 dataSource:
     pooled: true
     dbCreate: update
@@ -25,3 +38,4 @@ hibernate:
         use_second_level_cache: false
         use_query_cache: false
         region.factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
+

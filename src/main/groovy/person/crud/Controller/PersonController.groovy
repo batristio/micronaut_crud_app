@@ -8,9 +8,8 @@ import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Delete
 import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.Patch
-import io.micronaut.http.annotation.Post
 import io.micronaut.http.annotation.Put
-import io.reactivex.Single
+import io.micronaut.security.annotation.Secured
 import org.springframework.validation.FieldError
 import person.crud.Model.Person
 import person.crud.Service.PersonService
@@ -24,6 +23,7 @@ import org.grails.datastore.mapping.validation.ValidationException
 
 @CompileStatic
 @Transactional
+@Secured("isAuthenticated()")
 @Controller('/person')
 class PersonController {
 

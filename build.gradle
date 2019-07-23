@@ -27,6 +27,10 @@ configurations {
 }
 
 dependencies {
+    // micronaut security
+    annotationProcessor "io.micronaut:micronaut-security"
+    compile "io.micronaut:micronaut-security"
+    
     // import hibernate GORM and it's validation
     compile "io.micronaut.configuration:micronaut-hibernate-validator"
     compile 'io.micronaut.configuration:micronaut-hibernate-gorm'
